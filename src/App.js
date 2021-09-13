@@ -5,16 +5,19 @@ import axios from "axios"
 import CallTypeChart from "./components/CallTypeChart/index";
 import OccurDateChart from "./components/OccurDateChart/index";
 import OccurTimeChart from "./components/OccurTimeChart/index";
+import TotalPerDayChart from "./components/TotalPerDayChart/index"; 
 
 require('dotenv').config()
 
 class App extends Component { 
   state = {
-    sites: []
+    sites: [],
+    total: []
   }
 
   componentDidMount() {
       this.fetchSites()
+      this.fetchTotalPerDay()
   } 
 
 
@@ -27,7 +30,16 @@ class App extends Component {
     })
   }
 
+  
 
+  fetchTotalPerDay = async () => { 
+
+    const res = await axios.get(`https://data.seattle.gov/resource/umiy-nixb.json`)
+
+    this.setState({
+      total: res.data.reverse()
+    })
+  }
 
 
   render() {
@@ -37,6 +49,7 @@ class App extends Component {
           <p className="text-center p-0 text-white" style={{fontWeight: 620, fontSize: "16px"}}>Seattle Real Time Fire 911 Calls Dashboard</p> 
         </nav>
 
+        <TotalPerDayChart results={this.state.total}/>
         <OccurTimeChart results={this.state.sites}/> 
         <OccurDateChart results={this.state.sites}/> 
         <CallTypeChart results={this.state.sites}/> 
