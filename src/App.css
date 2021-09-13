@@ -39,6 +39,10 @@ nav {
   height: 585px; 
 }
 
+#mapid2 { 
+  height: 585px; 
+}
+
 .leaflet-tooltip{
   width: 350px !important;
   white-space: normal !important; 
