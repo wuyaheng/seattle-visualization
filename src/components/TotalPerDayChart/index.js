@@ -9,6 +9,10 @@ function TotalPerDayChart(props) {
   const LineChart = () => {
 
     let options = {
+      elements: {
+        point:{
+            radius: 0.3
+        }},
       legend: {
         display: false,
         reverse: true
@@ -30,12 +34,16 @@ function TotalPerDayChart(props) {
       },
       title: {
         display: true,
-        text: 'Total 911 Calls Per Day', 
+        text: 'Total 911 Calls Per Day in 2021', 
         fontSize: 15
      },
       scales: {
         xAxes: [
           {
+            type: 'time',
+            time: {
+              unit: 'month'
+            },
             gridLines: {
               display: false,
             },
@@ -47,8 +55,7 @@ function TotalPerDayChart(props) {
         yAxes: [{
           ticks: {
             display: true,
-            stepSize: 1,
-            beginAtZero: true
+            beginAtZero: true,
           },
           gridLines: {
             display: true
@@ -57,15 +64,20 @@ function TotalPerDayChart(props) {
       }
     };
 
+    window.props = props;
 
+    let data_2021 = props.results.filter(x => x?.datetime?.includes("2021"))
+
+    console.log(data_2021)
      return (
+
         <Line
           data={{
-            labels: props.results.map((x) => moment(x.datetime).format("l")),
+            labels: data_2021.map((x) => moment(x.datetime).format("l")),
             datasets: [
               {
-                data: props.results.map((x) => x.incident_number), 
-                backgroundColor: "#9eb3c2"
+                data: data_2021.map((x) => x.incident_number), 
+                fill: false
               },
             ],
           }}

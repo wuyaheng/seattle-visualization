@@ -28,7 +28,8 @@ export default (props) => {
         }
       ).addTo(mymap);
 
-        const points = props.results.map((location) => (location.latitude && location.longitude) ? [location.latitude, location.longitude] : [47.6062, -122.3321])
+        const points = props.results.filter((location) => (location.latitude && location.longitude))
+        .map((location) => [location.latitude, location.longitude])
 
 
         L.heatLayer(points, {radius: 34, blur: 8}).addTo(mymap);
