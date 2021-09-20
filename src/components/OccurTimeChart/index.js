@@ -8,6 +8,10 @@ function OccurTimeChart(props) {
     const obj = {};
 
     let options = {
+      elements: {
+        point:{
+            radius: 0.3
+        }},
       legend: {
         display: false,
         reverse: true
@@ -75,7 +79,8 @@ function OccurTimeChart(props) {
             datasets: [
               {
                 data: entries.map((x) => x[1]), 
-                backgroundColor: "#9eb3c2"
+                color: "#9eb3c2",
+                fill: false
               },
             ],
           }}

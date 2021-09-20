@@ -73,7 +73,7 @@ function CallTypeChart(props) {
     });
 
     let entries =
-      Object.entries(obj).sort((a, b) => (a[1] > b[1] ? -1 : 1)) || [];
+      Object.entries(obj).filter((x) => x[1] <=10 ).sort((a, b) => (a[1] > b[1] ? -1 : 1)) || [];
 
      return (
         <Bar
